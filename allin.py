@@ -5,7 +5,7 @@ representation = [[0, 0, 0, 2],
 
 numbers = [1, 2, 3, 4]
 
-
+# ku bohet dfs edhe backtracking ka nevoje per permiresim
 def vendos_numrin(rreshti, kolona):
     if rreshti == 4:
         return True
@@ -24,7 +24,7 @@ def vendos_numrin(rreshti, kolona):
         return False
     return True
 
-
+# tries every number in the given coordinate
 def check_no(rreshti, kolona):
     print("\n\n")
     for i, val in enumerate(representation):
