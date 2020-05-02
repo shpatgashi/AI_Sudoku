@@ -6,17 +6,6 @@ class Sudoku:
         super().__init__()
         self.repr = repr
         self.num = len(self.repr)
-        self.search_space = self.create_search_space()
-
-    def create_search_space(self):
-        search_space = []
-        for _ in range(self.num):
-            a = []
-            for __ in range(self.num):
-                a.append(list(range(1, self.num + 1)))
-            search_space.append(a)
-
-        return search_space
 
     def check(self, val, row, column):
         if val in self.repr[row] or val in list(zip(*self.repr))[column]:
@@ -31,17 +20,17 @@ class Sudoku:
                     return False
                 else:
                     continue
-
         else:
             return True
 
-    def add_value(self, row, column):
-        if self.repr[row][column] == 0:
-            for val in self.search_space[row][column]:
-                if self.check(val, row, column):
-                    self.repr[row][column] = val
+    def count_zeros(self):
+        zeros = 0
+        for i in range(self.num):
+            for j in range(self.num):
+                if self.repr[i][j] == 0:
+                    zeros += 1
 
-                    return True
+        return zeros
 
     def __repr__(self):
 
