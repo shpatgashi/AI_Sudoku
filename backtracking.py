@@ -1,4 +1,5 @@
-from sudoku import Sudoku
+from AI_Sudoku.sudoku import Sudoku
+from AI_Sudoku.field import Field
 
 
 # noinspection PyShadowingBuiltins
@@ -17,7 +18,8 @@ class Backtracking(Sudoku):
                 row += 1
 
         if self.repr[row][col] == 0:
-            for val in range(1, 10):
+            f = Field(row, col, self.num)
+            for val in f.search_space:
                 if self.check(val, row, col):
                     self.repr[row][col] = val
                     if self.add_values(row, col + 1):
@@ -31,3 +33,23 @@ class Backtracking(Sudoku):
     def solve_sudoku(self):
         if self.add_values(0, 0):
             print(self)
+
+
+a = Backtracking([[0, 6, 0, 0, 0, 0, 0, 0, 0],
+                  [7, 0, 0, 5, 0, 0, 0, 0, 3],
+                  [0, 3, 0, 7, 2, 6, 0, 0, 0],
+
+                  [4, 8, 0, 0, 0, 0, 0, 0, 1],
+                  [0, 0, 3, 1, 6, 7, 8, 0, 0],
+                  [2, 0, 0, 0, 0, 0, 0, 7, 5],
+
+                  [0, 0, 0, 9, 3, 1, 0, 8, 0],
+                  [5, 0, 0, 0, 0, 4, 0, 0, 2],
+                  [0, 0, 0, 0, 0, 0, 0, 9, 0]])
+
+import time
+
+start_time = time.time()
+
+a.solve_sudoku()
+print("--- %s seconds ---" % (time.time() - start_time))
