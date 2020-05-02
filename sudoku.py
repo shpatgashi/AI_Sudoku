@@ -25,11 +25,11 @@ class Sudoku:
 
     def count_zeros(self):
         zeros = 0
+
         for i in range(self.num):
             for j in range(self.num):
                 if self.repr[i][j] == 0:
                     zeros += 1
-
         return zeros
 
     def __repr__(self):

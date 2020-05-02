@@ -26,17 +26,14 @@ class Field:
             domain.append(i)
         for i in range(1, self.size + 1):
             # stack overflow for better perf
-            a1 = domain.copy()
-            b1 = domain.copy()
-            c1 = domain.copy()
-            Field.row_search.append(a1)
-            Field.col_search.append(b1)
-            Field.matrix_search.append(c1)
+            Field.row_search.append(domain.copy())
+            Field.col_search.append(domain.copy())
+            Field.matrix_search.append(domain.copy())
 
     def reduce_search_space(self, val):
-        Field.row_search[self.row].remove(val)
-        Field.col_search[self.col].remove(val)
-        Field.matrix_search[self.matrix_no].remove(val)
+        for search in [Field.row_search[self.row], Field.col_search[self.col], Field.matrix_search[self.matrix_no]]:
+            if val in search:
+                search.remove(val)
 
     def return_arc_consistency(self, val):
         Field.row_search[self.row].append(val)
@@ -53,9 +50,8 @@ class Field:
         for i in range(len(sudoku)):
             for j in range(len(sudoku)):
                 if sudoku[i][j] != 0:
-                    f = Field(i, j, self.size)
-                    f.reduce_search_space(sudoku[i][j])
-        self.choose_field()
+                    Field(i, j, self.size).reduce_search_space(sudoku[i][j])
+        # self.choose_field()
 
     def choose_field(self):
         # min = list.index(min(list, key=len))
