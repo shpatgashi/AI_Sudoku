@@ -1,5 +1,5 @@
 from math import sqrt
-from typing import List
+
 
 class Field:
     row_search = []
@@ -17,7 +17,8 @@ class Field:
     def get_search_space(self):
         if not Field.row_search:
             self.create_search_space()
-        return list(set(self.row_search[self.row]) & set(self.col_search[self.col]) & set(self.matrix_search[self.matrix_no]))
+        return list(
+            set(self.row_search[self.row]) & set(self.col_search[self.col]) & set(self.matrix_search[self.matrix_no]))
 
     def create_search_space(self):
         domain = []
@@ -52,10 +53,8 @@ class Field:
         for i in range(len(sudoku)):
             for j in range(len(sudoku)):
                 if sudoku[i][j] != 0:
-                    self.row = i
-                    self.col = j
-                    self.reduce_search_space(sudoku[i][j])
-
+                    f = Field(i, j, self.size)
+                    f.reduce_search_space(sudoku[i][j])
         self.choose_field()
 
     def choose_field(self):
@@ -65,5 +64,3 @@ class Field:
         # if sudoku[least_cons_row_index][least_cons_col_index] != 0:
 
         return most_cons_row_index, most_cons_col_index
-
-

@@ -1,5 +1,5 @@
-from AI_Sudoku.sudoku import Sudoku
 from AI_Sudoku.field import Field
+from AI_Sudoku.sudoku import Sudoku
 
 
 # noinspection PyShadowingBuiltins
@@ -33,11 +33,10 @@ class ForwardChecking(Sudoku):
 
     def solve_sudoku(self):
         if self.add_values(0, 0):
-            f= Field(0,1,3)
+            f = Field(0, 1, 3)
             Field.reset()
             print(self)
             f.reset()
-
 
 
 z = ForwardChecking([[0, 0, 0, 2],
