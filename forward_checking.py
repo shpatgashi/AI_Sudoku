@@ -7,12 +7,6 @@ class ForwardChecking(Sudoku):
     def __init__(self, repr):
         super().__init__(repr)
 
-    def reduce_search(self, val):
-        lol = self.domain.copy()
-        lol.remove(val)
-        # lol = self.domain.remove(val)
-        return lol
-
     def add_values(self, row, col):
         if col == self.num:
             if row == self.num - 1:
