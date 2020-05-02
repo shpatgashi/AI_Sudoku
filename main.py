@@ -1,10 +1,13 @@
-from node import sudoku
+from AI_Sudoku.backtracking import Backtracking
+from AI_Sudoku.forward_checking import ForwardChecking
+from AI_Sudoku.fc_dynamic_ordering import ForwardCheckingDO
+from AI_Sudoku.examples import sudokus
 
-sudoku.representation = [[0, 0, 0, 2],
-                         [0, 2, 0, 4],
-                         [0, 0, 0, 0],
-                         [3, 0, 0, 0]]
 
-box = sudoku(0, 0, [], 3)
+if __name__ == '__main__':
 
-box.fill_sudoku()
+    for sudoku in sudokus:
+        try:
+            ForwardCheckingDO(sudoku).solve_sudoku()
+        except:
+            continue
