@@ -1,6 +1,6 @@
 import numpy as np
 
-from examples import sudoku4
+from examples import sudokus
 from field import Field
 from sudoku import Sudoku
 
@@ -20,8 +20,6 @@ class ForwardCheckingDO(Sudoku):
             row, col = self.get_min()
 
         f = Field(row, col, self.num)
-        self.create_whole_ss()
-
         if self.repr[row][col] == 0:
             for val in f.search_space:
                 if self.check(val, row, col):
@@ -35,6 +33,7 @@ class ForwardCheckingDO(Sudoku):
                         if (row, col) in ForwardCheckingDO.closed_list:
                             self.ss[row][col] -= 10
                             ForwardCheckingDO.closed_list.remove((row, col))
+
         else:
             if self.add_values():
                 return True
@@ -55,24 +54,29 @@ class ForwardCheckingDO(Sudoku):
             search_space.append(a)
         return search_space
 
-    def get_min(self):
-        res = np.where(self.ss == self.ss.min())
-        row, col = res[0][0], res[1][0]
-        if (row, col) not in ForwardCheckingDO.closed_list:
-            self.ss[row][col] += 10
-            ForwardCheckingDO.closed_list.append((row, col))
-            return row, col
+    def get_min(self, i=0, val=0):
+
+        res = np.where(self.ss == self.ss.min() + val)
+        if i < len(res[0]):
+            row, col = res[0][i], res[1][i]
+            if (row, col) not in ForwardCheckingDO.closed_list:
+                self.ss[row][col] += 10
+                ForwardCheckingDO.closed_list.append((row, col))
+                return row, col
+            else:
+                return self.get_min(i + 1, val)
         else:
-            return self.get_min()
+            if val < self.ss.max():
+                return self.get_min(0, val + 1)
+            else:
+                res = np.where(self.ss == self.ss.max())
+                return self.get_min(res[0][-1], res[1][-1])
 
 
 if __name__ == '__main__':
-    representation = [[0, 0, 0, 2],
-                      [0, 0, 0, 4],
-                      [3, 0, 0, 0],
-                      [1, 0, 0, 0]]
 
-    fcdo = ForwardCheckingDO(sudoku4)
-    # fcdo = ForwardCheckingDO(representation)
-
-    fcdo.solve_sudoku()
+    for sudoku in sudokus:
+        try:
+            ForwardCheckingDO(sudoku).solve_sudoku()
+        except:
+            continue
