@@ -1,6 +1,5 @@
-from examples import sudoku4
-from field import Field
-from sudoku import Sudoku
+from AI_Sudoku.field import Field
+from AI_Sudoku.sudoku import Sudoku
 
 
 # noinspection PyShadowingBuiltins
@@ -34,19 +33,6 @@ class ForwardChecking(Sudoku):
 
     def solve_sudoku(self):
         if self.add_values(0, 0):
-            f = Field(0, 1, 3)
             Field.reset()
             print(self)
-            f.reset()
 
-
-import time
-
-start_time = time.time()
-
-e = ForwardChecking(sudoku4)
-e.solve_sudoku()
-
-print("--- %s seconds ---" % (time.time() - start_time))
-
-# y.solve_sudoku()
