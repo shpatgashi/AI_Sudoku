@@ -1,7 +1,7 @@
 from math import sqrt
 
 
-class Sudoku:
+class Sudoku():
     def __init__(self, repr):
         super().__init__()
         self.repr = repr
