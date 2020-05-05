@@ -1,5 +1,5 @@
-from AI_Sudoku.sudoku import Sudoku
-from AI_Sudoku.field import Field
+from field import Field
+from sudoku import Sudoku
 
 
 # noinspection PyShadowingBuiltins
@@ -46,5 +46,3 @@ a = Backtracking([[0, 6, 0, 0, 0, 0, 0, 0, 0],
                   [0, 0, 0, 9, 3, 1, 0, 8, 0],
                   [5, 0, 0, 0, 0, 4, 0, 0, 2],
                   [0, 0, 0, 0, 0, 0, 0, 9, 0]])
-
-

@@ -1,7 +1,7 @@
 import numpy as np
 
-from AI_Sudoku.field import Field
-from AI_Sudoku.sudoku import Sudoku
+from field import Field
+from sudoku import Sudoku
 
 
 # noinspection PyShadowingBuiltins,PyAttributeOutsideInit

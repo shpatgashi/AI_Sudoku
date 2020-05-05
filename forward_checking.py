@@ -1,5 +1,5 @@
-from AI_Sudoku.field import Field
-from AI_Sudoku.sudoku import Sudoku
+from field import Field
+from sudoku import Sudoku
 
 
 # noinspection PyShadowingBuiltins
@@ -35,4 +35,3 @@ class ForwardChecking(Sudoku):
         if self.add_values(0, 0):
             Field.reset()
             print(self)
-
