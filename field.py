@@ -29,9 +29,12 @@ class Field:
             Field.matrix_search.append(domain.copy())
 
     def reduce_search_space(self, val):
-        for search in [Field.row_search[self.row], Field.col_search[self.col], Field.matrix_search[self.matrix_no]]:
-            if val in search:
-                search.remove(val)
+        Field.row_search[self.row].remove(val)
+        Field.col_search[self.col].remove(val)
+        Field.matrix_search[self.matrix_no].remove(val)
+        # for search in [Field.row_search[self.row], Field.col_search[self.col], Field.matrix_search[self.matrix_no]]:
+        #     if val in search:
+        #         search.remove(val)
 
     def return_arc_consistency(self, val):
         Field.row_search[self.row].append(val)

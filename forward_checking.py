@@ -1,5 +1,6 @@
 from AI_Sudoku.field import Field
 from AI_Sudoku.sudoku import Sudoku
+from AI_Sudoku.examples import *
 
 
 # noinspection PyShadowingBuiltins
@@ -25,8 +26,8 @@ class ForwardChecking(Sudoku):
                     if self.add_values(row, col + 1):
                         return True
                     else:
-                        f.return_arc_consistency(val)
                         self.repr[row][col] = 0
+                        f.return_arc_consistency(val)
         else:
             if self.add_values(row, col + 1):
                 return True
@@ -36,3 +37,5 @@ class ForwardChecking(Sudoku):
             Field.reset()
             print(self)
 
+
+ForwardChecking(sudoku1).solve_sudoku()
